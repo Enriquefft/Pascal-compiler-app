@@ -1,6 +1,5 @@
-/*
- * @returns Home page component
- */
-export default async function Home() {
-	return "HELLO WORLD";
+import { PascalCompiler } from "@/components/pascal-compiler";
+
+export default function Home() {
+  return <PascalCompiler />;
 }
