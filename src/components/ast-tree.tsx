@@ -2,26 +2,35 @@
 import dynamic from "next/dynamic";
 import { CSSProperties } from "react";
 import type { AST, ASTNode } from "@/lib/ast";
+import type { RawNodeDatum } from "react-d3-tree";
 
 const Tree = dynamic(() => import("react-d3-tree").then(mod => mod.Tree), {
   ssr: false,
 });
 
-function astNodeToTree(node: ASTNode, label?: string) {
+interface ASTRawNodeDatum extends RawNodeDatum {
+  children?: ASTRawNodeDatum[];
+}
+
+function isASTNode(value: unknown): value is ASTNode {
+  return !!value && typeof value === "object" && "kind" in value;
+}
+
+function astNodeToTree(node: ASTNode, label?: string): ASTRawNodeDatum {
   const name = label ? `${node.kind} (${label})` : node.kind;
-  const attributes: Record<string, string> = {};
-  const children: any[] = [];
+  const attributes: Record<string, string | number | boolean> = {};
+  const children: ASTRawNodeDatum[] = [];
 
   for (const [key, value] of Object.entries(node)) {
     if (key === "kind") continue;
     if (Array.isArray(value)) {
-      if (value.length > 0 && typeof value[0] === "object" && value[0] && "kind" in value[0]) {
-        children.push({ name: key, children: value.map((v) => astNodeToTree(v as ASTNode)) });
+      if (value.length > 0 && isASTNode(value[0])) {
+        children.push({ name: key, children: (value as ASTNode[]).map((v) => astNodeToTree(v)) });
       } else if (value.length > 0) {
         attributes[key] = JSON.stringify(value);
       }
-    } else if (value && typeof value === "object" && "kind" in value) {
-      children.push(astNodeToTree(value as ASTNode, key));
+    } else if (isASTNode(value)) {
+      children.push(astNodeToTree(value, key));
     } else if (value !== undefined) {
       attributes[key] = String(value);
     }
