@@ -12,6 +12,8 @@
         "@radix-ui/react-scroll-area": "^1.2.8",
         "@radix-ui/react-slot": "^1.2.2",
         "@t3-oss/env-nextjs": "^0.13.4",
+        "@tanstack/react-query": "^5.81.5",
+        "@tanstack/react-query-devtools": "^5.2.1",
         "@types/bun": "^1.2.13",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
@@ -403,6 +405,14 @@
     "@tailwindcss/oxide-win32-x64-msvc": ["@tailwindcss/oxide-win32-x64-msvc@4.1.6", "", { "os": "win32", "cpu": "x64" }, "sha512-5k9xF33xkfKpo9wCvYcegQ21VwIBU1/qEbYlVukfEIyQbEA47uK8AAwS7NVjNE3vHzcmxMYwd0l6L4pPjjm1rQ=="],
 
     "@tailwindcss/postcss": ["@tailwindcss/postcss@4.1.6", "", { "dependencies": { "@alloc/quick-lru": "^5.2.0", "@tailwindcss/node": "4.1.6", "@tailwindcss/oxide": "4.1.6", "postcss": "^8.4.41", "tailwindcss": "4.1.6" } }, "sha512-ELq+gDMBuRXPJlpE3PEen+1MhnHAQQrh2zF0dI1NXOlEWfr2qWf2CQdr5jl9yANv8RErQaQ2l6nIFO9OSCVq/g=="],
+
+    "@tanstack/query-core": ["@tanstack/query-core@5.81.5", "", {}, "sha512-ZJOgCy/z2qpZXWaj/oxvodDx07XcQa9BF92c0oINjHkoqUPsmm3uG08HpTaviviZ/N9eP1f9CM7mKSEkIo7O1Q=="],
+
+    "@tanstack/query-devtools": ["@tanstack/query-devtools@5.81.2", "", {}, "sha512-jCeJcDCwKfoyyBXjXe9+Lo8aTkavygHHsUHAlxQKKaDeyT0qyQNLKl7+UyqYH2dDF6UN/14873IPBHchcsU+Zg=="],
+
+    "@tanstack/react-query": ["@tanstack/react-query@5.81.5", "", { "dependencies": { "@tanstack/query-core": "5.81.5" }, "peerDependencies": { "react": "^18 || ^19" } }, "sha512-lOf2KqRRiYWpQT86eeeftAGnjuTR35myTP8MXyvHa81VlomoAWNEd8x5vkcAfQefu0qtYCvyqLropFZqgI2EQw=="],
+
+    "@tanstack/react-query-devtools": ["@tanstack/react-query-devtools@5.81.5", "", { "dependencies": { "@tanstack/query-devtools": "5.81.2" }, "peerDependencies": { "@tanstack/react-query": "^5.81.5", "react": "^18 || ^19" } }, "sha512-lCGMu4RX0uGnlrlLeSckBfnW/UV+KMlTBVqa97cwK7Z2ED5JKnZRSjNXwoma6sQBTJrcULvzgx2K6jEPvNUpDw=="],
 
     "@testing-library/dom": ["@testing-library/dom@10.4.0", "", { "dependencies": { "@babel/code-frame": "^7.10.4", "@babel/runtime": "^7.12.5", "@types/aria-query": "^5.0.1", "aria-query": "5.3.0", "chalk": "^4.1.0", "dom-accessibility-api": "^0.5.9", "lz-string": "^1.5.0", "pretty-format": "^27.0.2" } }, "sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ=="],
 
