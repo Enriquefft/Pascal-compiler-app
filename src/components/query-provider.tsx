@@ -5,12 +5,14 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useState } from "react";
 
 export function QueryProvider({ children }: { children: React.ReactNode }) {
-  const [client] = useState(() => new QueryClient());
+	const [client] = useState(() => new QueryClient());
 
-  return (
-    <QueryClientProvider client={client}>
-      {children}
-      {process.env.NODE_ENV !== "production" && <ReactQueryDevtools initialIsOpen={false} />}
-    </QueryClientProvider>
-  );
+	return (
+		<QueryClientProvider client={client}>
+			{children}
+			{process.env.NODE_ENV !== "production" && (
+				<ReactQueryDevtools initialIsOpen={false} />
+			)}
+		</QueryClientProvider>
+	);
 }

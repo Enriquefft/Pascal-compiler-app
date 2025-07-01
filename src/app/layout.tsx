@@ -2,8 +2,8 @@ import "@/styles/globals.css";
 
 export { metadata } from "@/metadata";
 
-import { ThemeProvider } from "@/components/theme-provider";
 import { QueryProvider } from "@/components/query-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import { inter as fontSans } from "@/styles/fonts";
 
@@ -25,16 +25,16 @@ export default function RootLayout({
 					fontSans.className,
 				)}
 			>
-                                <QueryProvider>
-                                        <ThemeProvider
-                                                attribute="class"
-                                                defaultTheme="system"
-                                                enableSystem
-                                                disableTransitionOnChange
-                                        >
-                                                {children}
-                                        </ThemeProvider>
-                                </QueryProvider>
+				<QueryProvider>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						{children}
+					</ThemeProvider>
+				</QueryProvider>
 			</body>
 		</html>
 	);
