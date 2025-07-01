@@ -42,9 +42,9 @@ function astNodeToTree(node: ASTNode, label?: string): ASTRawNodeDatum {
 	return { attributes, children, name };
 }
 
-export function ASTTree({ ast }: { ast: AST }) {
-	if (!ast.root) return null;
-	const data = astNodeToTree(ast.root);
+export function ASTTree({ ast }: { ast?: AST }) {
+        if (!ast?.root) return null;
+        const data = astNodeToTree(ast.root);
 	const containerStyles: CSSProperties = { height: "500px", width: "100%" };
 	return (
 		<div style={containerStyles} className="border rounded-md bg-muted/50">
