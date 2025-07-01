@@ -6,6 +6,7 @@ import { z } from "zod";
 
 export const env = createEnv({
 	client: {
+		NEXT_PUBLIC_API_URL: z.string().url().optional(),
 		NEXT_PUBLIC_APP_URL: z.string().optional(),
 		NEXT_PUBLIC_PROJECT_NAME: z.string(),
 	},
@@ -13,6 +14,7 @@ export const env = createEnv({
 	emptyStringAsUndefined: false,
 	extends: [vercel()],
 	runtimeEnv: {
+		NEXT_PUBLIC_API_URL: process.env["NEXT_PUBLIC_API_URL"],
 		NEXT_PUBLIC_APP_URL: process.env["NEXT_PUBLIC_APP_URL"],
 		NEXT_PUBLIC_PROJECT_NAME: process.env["NEXT_PUBLIC_PROJECT_NAME"],
 	},

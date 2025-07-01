@@ -1,4 +1,5 @@
 import type { AST } from "./ast";
+import { env } from "@/env";
 
 export interface CompilationResult {
 	tokens?: { token_name: string; token_content: string }[];
@@ -11,7 +12,7 @@ export interface CompilationResult {
 }
 
 export async function compilePascal(code: string): Promise<CompilationResult> {
-	const response = await fetch("https://pascal-compiler.onrender.com/compile", {
+	const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/compile`, {
 		body: code,
 		headers: { "Content-Type": "text/plain" },
 		method: "POST",
