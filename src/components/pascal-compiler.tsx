@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { ASTTree } from "@/components/ast-tree";
 import { ModeToggle } from "@/components/mode-toogle";
 import { SubmitButton } from "@/components/submit-button";
@@ -12,20 +13,18 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { type CompilationResult, compilePascal } from "@/lib/mock-api";
+import { compilePascal } from "@/lib/compiler-api";
 
 export function PascalCompiler() {
 	const [code, setCode] = useState("");
-	const [result, setResult] = useState<CompilationResult | null>(null);
-	const [loading, setLoading] = useState(false);
+       const { mutateAsync, data: result, isPending } = useMutation({
+               mutationFn: compilePascal,
+       });
 
-	async function onSubmit(e: React.FormEvent) {
-		e.preventDefault();
-		setLoading(true);
-		const res = await compilePascal(code);
-		setResult(res);
-		setLoading(false);
-	}
+       async function onSubmit(e: React.FormEvent) {
+               e.preventDefault();
+               await mutateAsync(code);
+       }
 
 	return (
 		<div className="container mx-auto max-w-4xl py-10 space-y-6">
@@ -47,7 +46,7 @@ export function PascalCompiler() {
 							placeholder="begin\n  writeln('Hello World');\nend."
 							className="min-h-[180px]"
 						/>
-						<SubmitButton isSubmitting={loading}>Compile</SubmitButton>
+                                                <SubmitButton isSubmitting={isPending}>Compile</SubmitButton>
 					</form>
 				</CardContent>
 			</Card>
