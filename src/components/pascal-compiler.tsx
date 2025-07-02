@@ -6,12 +6,14 @@ import { ASTTree } from "@/components/ast-tree";
 import { ModeToggle } from "@/components/mode-toogle";
 import { SubmitButton } from "@/components/submit-button";
 import { PresetPicker } from "@/components/preset-picker";
+import { CopyButton } from "@/components/copy-button";
 import {
 	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
+        CardContent,
+        CardDescription,
+        CardHeader,
+        CardAction,
+        CardTitle,
 } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { compilePascal } from "@/lib/compiler-api";
@@ -38,13 +40,16 @@ export function PascalCompiler() {
 			<div className="flex justify-end">
 				<ModeToggle />
 			</div>
-			<Card>
-				<CardHeader>
-					<CardTitle>Pascal Playground</CardTitle>
-					<CardDescription>
-						Enter your Pascal code and compile it
-					</CardDescription>
-				</CardHeader>
+                        <Card>
+                                <CardHeader>
+                                        <CardTitle>Pascal Playground</CardTitle>
+                                        <CardDescription>
+                                                Enter your Pascal code and compile it
+                                        </CardDescription>
+                                        <CardAction>
+                                                <CopyButton value={code} />
+                                        </CardAction>
+                                </CardHeader>
                                 <CardContent>
                                         <div className="mb-4">
                                                 <PresetPicker onSelect={setCode} />
@@ -81,13 +86,20 @@ export function PascalCompiler() {
 						</Card>
 					)}
 
-					{result.tokens && (
-						<Card>
-							<CardHeader>
-								<CardTitle>Tokens</CardTitle>
-							</CardHeader>
-							<CardContent>
-								<ul className="text-sm font-mono space-y-1">
+                                        {result.tokens && (
+                                                <Card>
+                                                        <CardHeader>
+                                                                <CardTitle>Tokens</CardTitle>
+                                                                <CardAction>
+                                                                        <CopyButton
+                                                                                value={result.tokens
+                                                                                        .map((t) => `${t.token_name} ${t.token_content}`)
+                                                                                        .join("\n")}
+                                                                        />
+                                                                </CardAction>
+                                                        </CardHeader>
+                                                        <CardContent>
+                                                                <ul className="text-sm font-mono space-y-1">
 									{result.tokens.map((t, i) => (
 										<li
 											key={i.toString()}
@@ -115,31 +127,37 @@ export function PascalCompiler() {
 						</Card>
 					)}
 
-					{result.asm && (
-						<Card>
-							<CardHeader>
-								<CardTitle>ASM Code</CardTitle>
-							</CardHeader>
-							<CardContent>
-								<pre className="whitespace-pre-wrap text-sm font-mono">
-									{result.asm}
-								</pre>
-							</CardContent>
-						</Card>
-					)}
+                                        {result.asm && (
+                                                <Card>
+                                                        <CardHeader>
+                                                                <CardTitle>ASM Code</CardTitle>
+                                                                <CardAction>
+                                                                        <CopyButton value={result.asm} />
+                                                                </CardAction>
+                                                        </CardHeader>
+                                                        <CardContent>
+                                                                <pre className="whitespace-pre-wrap text-sm font-mono">
+                                                                        {result.asm}
+                                                                </pre>
+                                                        </CardContent>
+                                                </Card>
+                                        )}
 
-					{result.output && (
-						<Card>
-							<CardHeader>
-								<CardTitle>Output</CardTitle>
-							</CardHeader>
-							<CardContent>
-								<pre className="whitespace-pre-wrap text-sm font-mono">
-									{result.output}
-								</pre>
-							</CardContent>
-						</Card>
-					)}
+                                        {result.output && (
+                                                <Card>
+                                                        <CardHeader>
+                                                                <CardTitle>Output</CardTitle>
+                                                                <CardAction>
+                                                                        <CopyButton value={result.output} />
+                                                                </CardAction>
+                                                        </CardHeader>
+                                                        <CardContent>
+                                                                <pre className="whitespace-pre-wrap text-sm font-mono">
+                                                                        {result.output}
+                                                                </pre>
+                                                        </CardContent>
+                                                </Card>
+                                        )}
 				</div>
 			)}
 		</div>
