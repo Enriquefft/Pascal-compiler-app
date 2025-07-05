@@ -45,20 +45,20 @@ export function PascalCompiler() {
 						Enter your Pascal code and compile it
 					</CardDescription>
 				</CardHeader>
-                                <CardContent>
-                                        <div className="mb-4">
-                                                <PresetPicker onSelect={setCode} />
-                                        </div>
-                                        <form onSubmit={onSubmit} className="space-y-4">
-                                                <Textarea
-                                                        value={code}
-                                                        onChange={(e) => setCode(e.target.value)}
-                                                        placeholder="begin\n  writeln('Hello World');\nend."
-                                                        className="min-h-[180px]"
-                                                />
-                                                <SubmitButton isSubmitting={isPending}>Compile</SubmitButton>
-                                        </form>
-                                </CardContent>
+				<CardContent>
+					<div className="mb-4">
+						<PresetPicker onSelect={setCode} />
+					</div>
+					<form onSubmit={onSubmit} className="space-y-4">
+						<Textarea
+							value={code}
+							onChange={(e) => setCode(e.target.value)}
+							placeholder="begin\n  writeln('Hello World');\nend."
+							className="min-h-[180px]"
+						/>
+						<SubmitButton isSubmitting={isPending}>Compile</SubmitButton>
+					</form>
+				</CardContent>
 			</Card>
 
 			{result && (

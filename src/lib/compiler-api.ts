@@ -1,3 +1,4 @@
+"use server";
 import type { AST } from "./ast";
 import { env } from "@/env";
 
@@ -22,5 +23,9 @@ export async function compilePascal(code: string): Promise<CompilationResult> {
 		throw new Error(`Request failed with status ${response.status}`);
 	}
 
-	return (await response.json()) as CompilationResult;
+	const result: CompilationResult = await response.json();
+
+	console.log("Compilation Result:", result);
+
+	return result;
 }

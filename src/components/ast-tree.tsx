@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import { type CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import type { RawNodeDatum } from "react-d3-tree";
 import type { AST, ASTNode } from "@/lib/ast";
 
@@ -17,6 +17,8 @@ function isASTNode(value: unknown): value is ASTNode {
 }
 
 function astNodeToTree(node: ASTNode, label?: string): ASTRawNodeDatum {
+	console.log("Converting AST Node to Tree:", node);
+
 	const name = label ? `${node.kind} (${label})` : node.kind;
 	const attributes: Record<string, string | number | boolean> = {};
 	const children: ASTRawNodeDatum[] = [];
@@ -43,8 +45,8 @@ function astNodeToTree(node: ASTNode, label?: string): ASTRawNodeDatum {
 }
 
 export function ASTTree({ ast }: { ast?: AST }) {
-	if (!ast?.root) return null;
-	const data = astNodeToTree(ast.root);
+	if (!ast) return null;
+	const data = astNodeToTree(ast);
 	const containerStyles: CSSProperties = { height: "500px", width: "100%" };
 	return (
 		<div style={containerStyles} className="border rounded-md bg-muted/50">

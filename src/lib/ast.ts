@@ -15,6 +15,7 @@ export enum NodeKind {
 	Program = "Program",
 	Block = "Block",
 	VarDecl = "VarDecl",
+	VarSection = "VarSection",
 	TypeDecl = "TypeDecl",
 	ConstDecl = "ConstDecl",
 	ProcedureDecl = "ProcedureDecl",
@@ -273,7 +274,7 @@ export interface DisposeExpr {
 
 /* Root AST container */
 
-export interface AST {
+export interface AST extends ASTNode {
 	root: Program | null;
 	valid: boolean;
 }
